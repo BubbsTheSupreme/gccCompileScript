@@ -4,6 +4,10 @@ import os
 
 binary = sys.argv[1]
 filename = sys.argv[2]
+extra_options = sys.argv[3]
+
+if binary == '-h':
+    print('compile.py binary_name source_file_name')
 
 for root, folder, file in os.walk(f'{os.getcwd()}'):
     if file == binary:
@@ -11,4 +15,9 @@ for root, folder, file in os.walk(f'{os.getcwd()}'):
         os.remove(file)
 
 print(f'compiling {binary}')
-os.system(f'gcc -o {binary} {filename}')
+
+if extra_options != None:
+    os.system(f'gcc -o {binary} {filename} {extra_options}')
+else:
+    os.system(f'gcc -o {binary} {filename}')
+
