@@ -2,20 +2,18 @@
 import sys
 import os
 
-binary = sys.argv[1]
-filename = sys.argv[2]
+option = sys.argv[1]
 
 if binary == '-h':
-    print('compile.py binary_name source_file_name')
+    print('compile.py option_name')
 
 for root, folder, file in os.walk(f'{os.getcwd()}'):
     if file == binary:
         print(f'deleting {file}')
-        os.remove(file)
+        os.system('make clean')
 
-if len(sys.argv) > 3:
-    extra_options = sys.argv[3]
-    if extra_options != None:
-        os.system(f'gcc -o {binary} {filename} {extra_options}')
-    else:
-        os.system(f'gcc -o {binary} {filename}')
+print(f'compiling {binary}')
+if len(sys.argv) > 2:
+    os.system(f"make {option}")
+else:
+    os.system('make')
